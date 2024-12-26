@@ -1,0 +1,7 @@
+venv/
+
+*.sqlite
+
+media/
+
+*/__pycache__
