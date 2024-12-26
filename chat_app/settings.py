@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # custom app
+    "userauths.apps.UserauthsConfig",
 ]
 
 MIDDLEWARE = [
@@ -128,6 +130,9 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os_path.join(BASE_DIR, "media")
+
+# User model
+AUTH_USER_MODEL = "userauths.User"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
