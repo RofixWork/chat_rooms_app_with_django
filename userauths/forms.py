@@ -13,6 +13,8 @@ class SignUpForm(UserCreationForm):
             attrs={"class": class_value, "placeholder": "**********"}
         ),
         label="Your Password",
+        
+        
     )
 
     password2 = forms.CharField(
