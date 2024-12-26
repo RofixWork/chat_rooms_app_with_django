@@ -134,6 +134,13 @@ MEDIA_ROOT = os_path.join(BASE_DIR, "media")
 # User model
 AUTH_USER_MODEL = "userauths.User"
 
+# redirects
+LOGIN_URL = "auth:login"
+LOGIN_REDIRECT_URL = "/"
+
+LOGOUT_REDIRECT_URL = "/"
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -141,10 +148,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Jazzmin config
 JAZZMIN_SETTINGS = {
-    "site_title": "Chat Roms Application",
+    "site_title": "Chat Rooms Application",
     "site_brand": "CRA",
-    "welcome_msg": "Welcome to Chat Roms Application",
-    "copyright": "Chat Roms Application",
+    "welcome_msg": "Welcome to Chat Rooms Application",
+    "copyright": "Chat Rooms Application",
     "show_ui_builder": True,
 }
 
