@@ -11,9 +11,38 @@
     </div>
 </div>
 <div class="fixed right-0 bottom-6" style="width: 100%;">
-    <form class='mx-auto ' action="" style="width: 40%;">
-        <input class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" type="text" name="message" id="" placeholder="Type a message">
+    <form id="form_send_message" class='mx-auto ' action="" style="width: 40%;">
+        <input id="message" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" type="text" placeholder="Type a message">
     </form>
+    {{room.slug|json_script:'json-room_name'}}
+    {{user.username|json_script:'json-username'}}
 </div>
+
+
+<script>
+    const formSendMessage = document.getElementById('form_send_message');
+    const chatRoomName = JSON.parse(document.getElementById('json-room_name').textContent);
+    const username = JSON.parse(document.getElementById('json-username').textContent);
+    
+    // تصحيح المسار ليطابق إعدادات WebSocket
+    const ws = new WebSocket(`ws://${window.location.host}/ws/${chatRoomName}/`);
+
+    ws.onmessage = event => console.log(event.data);
+    ws.onclose = event => console.log("WebSocket connection closed.");
+
+    formSendMessage.addEventListener('submit', (e) => {
+        e.preventDefault();
+        // يمكنك إضافة إرسال الرسالة هنا\
+        const message = document.getElementById('message').value;
+        if (message.trim()) {
+            ws.send(JSON.stringify({
+                "message": message,
+                "username": username,
+                "room": chatRoomName,
+            }));
+        }
+    });
+</script>
+
 
 {% endblock sub_content %}
