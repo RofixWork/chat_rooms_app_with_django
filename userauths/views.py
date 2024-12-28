@@ -2,12 +2,14 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
 from django.views.generic import CreateView, FormView
 
+from utils.mixins import UserAlreadyLoggedIn
+
 from .forms import SignInForm, SignUpForm
 from .models import User
 
 
 # Create your views here.
-class RegisterView(CreateView):
+class RegisterView(UserAlreadyLoggedIn, CreateView):
     model = User
     template_name = "userauths/sign-up.html"
     form_class = SignUpForm
@@ -27,7 +29,7 @@ class RegisterView(CreateView):
             return self.form_invalid(form)
 
 
-class LoginView(FormView):
+class LoginView(UserAlreadyLoggedIn, FormView):
     template_name = "userauths/sign-in.html"
     form_class = SignInForm
     success_url = "/"
