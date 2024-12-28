@@ -6,4 +6,5 @@ app_name = "chats"
 
 urlpatterns = [
     path("", views.home_view, name="home"),
+    path("create-room/", views.create_new_room_view, name="create_room"),
 ]
