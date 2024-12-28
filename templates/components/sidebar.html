@@ -16,6 +16,17 @@
         </span>
       </li>
       <hr class="h-px my-8 border-0 bg-gray-300">
+      
+      {% for room in rooms %}
+        <li>
+          <a href="{% url 'chats:chat_room' slug=room.slug %}"
+            class="flex items-center p-2 cursor-pointer text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 group"
+          >   
+            <span class="ms-3">{{room.name|capfirst}}</span>
+          </a>
+        </li>
+      {% endfor %}
+        
     </ul>
   </div>
 </aside>
