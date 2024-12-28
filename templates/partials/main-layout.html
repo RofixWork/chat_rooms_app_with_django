@@ -1,0 +1,21 @@
+{% extends "base.html" %} {% block title %} Home {% endblock title %} 
+{% block content %}
+
+    {% comment %} navbar {% endcomment %}
+    {% include "components/navbar.html" %}
+
+    {% comment %} sidebar {% endcomment %}
+    {% include "components/sidebar.html" %}
+
+
+<div class="p-4 sm:ml-64">
+    <div class="mt-14">
+        
+        {% block sub_content %}
+            
+        {% endblock sub_content %}
+            
+    </div>
+</div>
+
+{% endblock content %}
