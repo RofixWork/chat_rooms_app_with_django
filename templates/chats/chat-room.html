@@ -1,5 +1,19 @@
 {% extends "partials/main-layout.html" %} {% block title %} Home {% endblock title %} 
 {% block sub_content %}
-<h1>{{room.name}}</h1>
+<div class='overflow-y-auto' style='height: 80vh;'>
+    {% comment %} room name {% endcomment %}
+    <div class='mb-2 px-4 p-2 shadow-md bg-white'>
+        <h1>#{{room.name|capfirst}}</h1>
+    </div>
+    {% comment %} messages {% endcomment %}
+    <div class='py-2 px-4'>
+        <h1>message</h1>
+    </div>
+</div>
+<div class="fixed right-0 bottom-6" style="width: 100%;">
+    <form class='mx-auto ' action="" style="width: 40%;">
+        <input class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" type="text" name="message" id="" placeholder="Type a message">
+    </form>
+</div>
 
 {% endblock sub_content %}
