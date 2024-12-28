@@ -56,7 +56,7 @@
           >
             <div class="px-4 py-3" role="none">
               <p class="text-sm text-gray-900 dark:text-white" role="none">
-                {% if user.profile.first_name and user.profile.lasst_name %}
+                {% if user.profile.first_name and user.profile.last_name %}
                   {{user.profile.first_name|capfirst}} {{user.profile.last_name|capfirst}}
                 {% else %}
                   {{user|capfirst}}
