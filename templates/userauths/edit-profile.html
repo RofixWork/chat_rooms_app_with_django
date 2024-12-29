@@ -16,11 +16,14 @@
                 </div>
             {% endfor %}
         {% endif %}
-        <h2 class='text-lg md:text-4xl mb-3'>Edit Profile Information</h2>
+        <h2 class='text-lg md:text-4xl mb-3 underline'>Edit Profile Information</h2>
         <form action="{% url 'auth:edit_profile' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {% for field in form %}
                     <div class='mb-3'>
+                        {% if field.name == 'image' %}
+                            <img src="{{user.profile.image.url}}" class='mx-auto my-4 w-16 h-16 rounded-full' alt="">
+                        {% endif %}
                         {{field}}
                         {% if field.errors %}
                             {% for error in field.errors %}
