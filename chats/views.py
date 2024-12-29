@@ -7,7 +7,7 @@ from django.urls import reverse
 from django.views.generic import CreateView, DetailView, ListView
 
 from .forms import CreateRoomForm
-from .models import ChatRoom
+from .models import ChatMessage, ChatRoom
 
 
 # Create your views here.
@@ -46,6 +46,9 @@ class ChatRoomView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         context["rooms"] = ChatRoom.objects.all()
         context["form_create_room"] = CreateRoomForm()
+        context["room_messages"] = ChatMessage.objects.filter(
+            room=self.get_object()
+        ).order_by("created_at")
         return context
 
     def get_object(self, queryset=None):

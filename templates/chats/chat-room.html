@@ -6,40 +6,81 @@
         <h1>#{{room.name|capfirst}}</h1>
     </div>
     {% comment %} messages {% endcomment %}
-    <div class='py-2 px-4'>
-        <h1>message</h1>
+    <div class='py-2 px-4' id='messages_wrapper'>
+        
+        {% for message in room_messages %}
+            <div class='mb-2 bg-gray-200 p-2 rounded-md' style='width: fit-content;'>
+                <div class='flex items-center gap-2 mb-2'>
+                    <div class='h-10 w-10 rounded-full overflow-hidden'>
+                        <img class='w-full h-full object-cover' src="{{message.user.profile.image.url}}" alt="">
+                    </div>
+                    <div>
+                        <h3 class='text-xs'>{{message.user.username|capfirst}}</h3>
+                        <h4 class='text-xs text-muted'>{{message.created_at|timesince}}</h4>
+                    </div>
+                </div>
+                <p class='text-xs'>{{message.message}}</p>
+            </div>
+        {% empty %}
+            <div class='text-center text-gray-500'>No messages yet</div>
+        {% endfor %}
+            
     </div>
 </div>
 <div class="fixed right-0 bottom-6" style="width: 100%;">
-    <form id="form_send_message" class='mx-auto ' action="" style="width: 40%;">
-        <input id="message" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" type="text" placeholder="Type a message">
+    <form id="form_send_message" class='mx-auto' action="" style="width: 50%;">
+        <input id="message" class="w-full bg-gray-50 border-2 border-blue-600 text-gray-900 text-sm rounded-lg block w-full p-2.5" type="text" placeholder="Type a message">
     </form>
-    {{room.slug|json_script:'json-room_name'}}
-    {{user.username|json_script:'json-username'}}
 </div>
+{{room.slug|json_script:'json-room_name'}}
+{{user.username|json_script:'json-username'}}
+{{user.profile.image.url|json_script:'json-profile_pic'}}
 
 
 <script>
     const formSendMessage = document.getElementById('form_send_message');
     const chatRoomName = JSON.parse(document.getElementById('json-room_name').textContent);
     const username = JSON.parse(document.getElementById('json-username').textContent);
+    const profilePic = JSON.parse(document.getElementById('json-profile_pic').textContent);
+    const messagesWrapper = document.getElementById('messages_wrapper');
     
     // تصحيح المسار ليطابق إعدادات WebSocket
     const ws = new WebSocket(`ws://${window.location.host}/ws/${chatRoomName}/`);
 
-    ws.onmessage = event => console.log(event.data);
+    ws.onmessage = function(event) {
+        const message = JSON.parse(event.data)
+        const html = `<div class='mb-3 bg-gray-200 p-2 rounded-md' style='width: fit-content;'>
+            <div class='flex items-center gap-2 mb-2'>
+                <div class='h-10 w-10 rounded-full overflow-hidden'>
+                    <img class='w-full h-full object-cover' src="${message.avatar}" alt="">
+                </div>
+                <div>
+                    <h3 class='text-xs'>${message.username}</h3>
+                    <h4 class='text-xs text-gray-800'>Now</h4>
+                </div>
+            </div>
+            <p class='text-xs'>${message.message}</p>
+        </div>`
+
+        messagesWrapper.insertAdjacentHTML('beforeend', html);
+    }
     ws.onclose = event => console.log("WebSocket connection closed.");
 
     formSendMessage.addEventListener('submit', (e) => {
         e.preventDefault();
         // يمكنك إضافة إرسال الرسالة هنا\
-        const message = document.getElementById('message').value;
+        const messageInput = document.getElementById('message');
+        const message = messageInput.value;
         if (message.trim()) {
             ws.send(JSON.stringify({
                 "message": message,
                 "username": username,
                 "room": chatRoomName,
+                "avatar": profilePic
             }));
+
+            messageInput.value = '';
+            messageInput.focus();
         }
     });
 </script>
