@@ -16,7 +16,6 @@
         </span>
       </li>
       <hr class="h-px my-8 border-0 bg-gray-300">
-      
       {% for room in rooms %}
         <li class='flex items-center justify-between'>
           <a href="{% url 'chats:chat_room' slug=room.slug %}"

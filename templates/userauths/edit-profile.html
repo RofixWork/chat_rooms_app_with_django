@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+    Edit Profile
+{% endblock title %}
+
+
+{% block content %}
+    {% include "components/navbar.html" %}
+    <div class="mt-14 max-w-md mx-auto py-3">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="m-2 mb-3 p-4 text-sm rounded-lg bg-gray-800 text-gray-300" role="alert">
+                    <span class="font-medium">{{message}}</span>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <h2 class='text-lg md:text-4xl mb-3'>Edit Profile Information</h2>
+        <form action="{% url 'auth:edit_profile' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+                    <div class='mb-3'>
+                        {{field}}
+                        {% if field.errors %}
+                            {% for error in field.errors %}
+                                <span class="block text-red-600 text-xs mt-1">{{ error }}</span>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+            {% endfor %}
+            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+        </form>
+    </div>
+{% endblock content %}
+    
+    
