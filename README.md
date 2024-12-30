@@ -59,7 +59,7 @@ This is a chat room application built using Django. It supports real-time messag
 ### Steps
 1. Clone the repository:
    ```bash
-   git clone <repository_url>
+   git clone https://github.com/RofixWork/chat_rooms_app_with_django.git
    ```
 2. Install dependencies:
    ```bash
@@ -78,7 +78,32 @@ This is a chat room application built using Django. It supports real-time messag
 ---
 
 ## Screenshots
-_Add relevant screenshots of the application interface here._
+### Register Page
+![register](https://github.com/user-attachments/assets/1722819e-4ab7-4fe0-b9e7-e5ba5d261c35)
+
+### Login Page
+![login](https://github.com/user-attachments/assets/111172ac-0ebb-46ab-871e-8e0b7e244cda)
+
+### Edit Profile Form
+![editprofile](https://github.com/user-attachments/assets/12d0e39c-3b16-4550-aca9-0e6901a6a724)
+
+### Home Page
+![home2](https://github.com/user-attachments/assets/1471b980-c28f-4053-8e61-ff85c6e41819)
+
+### Form for Add New Room
+![aaddnewroom](https://github.com/user-attachments/assets/4891b86c-93a9-4a28-8aeb-28db30ad802d)
+
+### Chat Room
+![room_message](https://github.com/user-attachments/assets/01bf888d-7e33-4f2b-9b2b-5231dadda884)
+
+### Real Time Chat (Websocket & ASGI)
+![realtime](https://github.com/user-attachments/assets/071663d7-defb-4ea4-8633-4fbb71c1818c)
+
+### Room Name already exist (because room_name is unique)
+![raeady2](https://github.com/user-attachments/assets/a3e26bd9-ea23-4375-8897-b238eda761f8)
+
+![ready2](https://github.com/user-attachments/assets/cc90b6bd-8c87-4a02-ae32-cc2a4f4c653a)
+
 
 ---
 
