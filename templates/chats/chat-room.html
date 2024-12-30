@@ -2,7 +2,7 @@
 {% block sub_content %}
 <div class='overflow-y-auto' style='max-height: 80vh;' id='chat_content_wrapper'>
     {% comment %} room name {% endcomment %}
-    <div class='sticky top-0  mb-2 px-4 p-2 shadow-md bg-white'>
+    <div class='sticky top-0  mb-2 px-4 py-2 shadow-md bg-white'>
         <h1>#{{room.name|capfirst}}</h1>
     </div>
     {% comment %} messages {% endcomment %}

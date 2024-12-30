@@ -21,6 +21,7 @@
             {% csrf_token %}
             {% for field in form %}
                     <div class='mb-3'>
+                        {% comment %} render profile image {% endcomment %}
                         {% if field.name == 'image' %}
                             <img src="{{user.profile.image.url}}" class='mx-auto my-4 w-16 h-16 rounded-full' alt="">
                         {% endif %}
